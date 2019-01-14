@@ -1,0 +1,12 @@
+{
+  "name": "express-node",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "lowdb": "^1.0.0"
+  },
+  "devDependencies": {}
+}
