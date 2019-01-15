@@ -23,7 +23,7 @@ import ListContainer from '../components/ListContainer.vue'
 import ListByStatus from '../components/ListByStatus.vue'
 
 export default {
-  name: 'DefaultLayout',
+  name: 'TheDefaultLayout',
   components: {
     TopToolbar,
     ListContainer,

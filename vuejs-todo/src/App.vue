@@ -2,17 +2,17 @@
   <div id="app">
     <modals-container />
 
-    <DefaultLayout />
+    <TheDefaultLayout />
   </div>
 </template>
 
 <script>
-import DefaultLayout from './layouts/DefaultLayout.vue'
+import TheDefaultLayout from './layouts/TheDefaultLayout.vue'
 
 export default {
   name: 'app',
   components: {
-    DefaultLayout,
+    TheDefaultLayout,
   }
 }
 </script>
