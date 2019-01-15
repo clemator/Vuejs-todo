@@ -1,6 +1,7 @@
 <template>
   <div
     :class="['list-by-status', status]"
+    v-drag-and-drop:options="options"
   >
     <div
       class="list-title"
@@ -14,6 +15,7 @@
       <TodoElement
         @todo-click="selectTodo(todo)"
         :todo="todo"
+        @todo-drag="setTodo(todo)"
       />
     </div>
   </div>
@@ -27,6 +29,25 @@ import { fetchMixin } from '../mixin/fetch'
 export default {
   name: "ListByStatus",
   mixins: [fetchMixin],
+  data() {
+    const vm = this;
+
+    return {
+      options: {
+        dropzoneSelector: 'div.list-by-status',
+        draggableSelector: 'div.todo-element',
+        showDropzoneAreas: true,
+        onDragend(event) {
+          const {description, id} = vm.$store.getters['todos/todo']
+          const targetStatus = event.droptarget.className.split(' ')[1];
+          return vm.$store.dispatch('todos/updateTodo', {id, description, status: targetStatus})
+            .then(() => vm.put())
+            .then(() => { event.stop() })
+            .catch(err => { return err })
+        },
+      }
+    }
+  },
   components: {
     TodoElement
   },
@@ -47,8 +68,11 @@ export default {
     }
   },
   methods: {
-    selectTodo(todo) {
+    setTodo(todo) {
       return this.$store.dispatch('todos/setTodo', todo)
+    },
+    selectTodo(todo) {
+      return this.setTodo(todo)
         .then(this.openEditionModal())
     },
     closeModal() {

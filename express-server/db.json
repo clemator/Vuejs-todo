@@ -17,33 +17,38 @@
     },
     {
       "description": "Test",
-      "status": "doing",
+      "status": "backlog",
       "id": 4
     },
     {
       "description": "Promise ?",
-      "status": "done",
+      "status": "doing",
       "id": 5
     },
     {
       "description": "Test without get",
-      "status": "backlog",
+      "status": "done",
       "id": 6
     },
     {
       "description": "Papa",
-      "status": "backlog",
+      "status": "doing",
       "id": 8
     },
     {
       "description": "Test",
-      "status": "doing",
+      "status": "done",
       "id": 9
     },
     {
       "description": "MAMAMIA",
       "status": "done",
       "id": 12
+    },
+    {
+      "description": "Eric James",
+      "status": "backlog",
+      "id": 13
     }
   ]
 }
