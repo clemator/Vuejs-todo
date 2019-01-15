@@ -66,7 +66,7 @@
 
       <button
         class="todo-form__submit-button"
-        @click="this.deleteCallback()"
+        @click="deleteCallback()"
       >
         Delete
       </button>

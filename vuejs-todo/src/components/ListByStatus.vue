@@ -51,6 +51,9 @@ export default {
       return this.$store.dispatch('todos/setTodo', todo)
         .then(this.openEditionModal())
     },
+    closeModal() {
+      this.$modal.hide('edition-modal')
+    },
     openEditionModal() {
       const {description, status, id} = this.$store.getters['todos/todo']
 
@@ -60,17 +63,19 @@ export default {
         callback: (todo) => {
           return this.$store.dispatch('todos/setTodo', todo)
             .then(() => this.put())
-            /* eslint-disable-next-line */
-            .catch(err => console.error(err))
             .then(this.closeModal())
+            .catch(err => console.error(err))
+        },
+        deleteCallback: () => {
+          return this.$store.dispatch('todos/deleteTodo', id)
+            .then(() => this.delete())
+            .then(this.closeModal())
+            .catch(err => console.error(err))
         }
       }, {
         name: 'edition-modal'
       })
     },
-    closeModal() {
-      this.$modal.hide('edition-modal')
-    }
   }
 };
 </script>

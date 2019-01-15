@@ -58,5 +58,19 @@ export const fetchMixin = {
         .then(() => this.$store.dispatch('todos/unsetTodo'))
         .catch(err => Promise.reject(err));
     },
+    delete() {
+      const todoId = this.$store.getters['todos/todo'].id
+      const params = {
+        method: 'delete',
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+        }
+      }
+
+      return fetch('http://localhost:3000/todos/' + todoId, params)
+        .then(res => res.json())
+        .then(() => this.$store.dispatch('todos/unsetTodo'))
+        .catch(err => Promise.reject(err));
+    }
   }
 };

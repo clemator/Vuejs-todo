@@ -11,7 +11,7 @@ const getters = {
    *  @return {Array}
    */
   todos: (state) => {
-    return state.todos;
+    return state.todos
   },
   /**
    *  Todo
@@ -20,7 +20,7 @@ const getters = {
    *  @return {Object}
    */
   todo: (state) => {
-    return state.todo;
+    return state.todo
   }
 };
 
@@ -35,7 +35,7 @@ const actions = {
     if (todos.length === 0)
       return;
 
-    commit('pushTodos', todos);
+    commit('pushTodos', todos)
   },
   /**
    *  Set a Todo
@@ -44,7 +44,7 @@ const actions = {
    *  @param {Object} todo
    */
   setTodo({commit}, todo) {
-    commit('setTodo', todo);
+    commit('setTodo', todo)
   },
   /**
    *  Unset the Todo
@@ -52,7 +52,7 @@ const actions = {
    *  @param {Object} state
    */
   unsetTodo({commit}) {
-    commit('unsetTodo');
+    commit('unsetTodo')
   },
   /**
    *  Add a single todo
@@ -73,7 +73,7 @@ const actions = {
     if (typeof id !== 'number')
       return;
 
-    commit('removeTodo', id);
+    commit('removeTodo', id)
   },
   /**
    *  Complete Todo
@@ -85,7 +85,7 @@ const actions = {
     if (typeof id !== 'number')
       return;
 
-    commit('completeTodo', id);
+    commit('completeTodo', id)
   },
   /**
    *  Update a todo from todos
@@ -94,7 +94,13 @@ const actions = {
    *  @param {Object} todo
    */
   updateTodo({ commit }, todo) {
-    commit('updateTodo', todo);
+    commit('updateTodo', todo)
+  },
+  /**
+   *  Delete a todo from todo list
+   */
+  deleteTodo({ commit }, id) {
+    commit('deleteTodoById', id)
   }
 };
 
@@ -109,7 +115,7 @@ const mutations = {
    *  @param {Array} todos
    */
   pushTodos(state, todos) {
-    state.todos = [...todos];
+    state.todos = [...todos]
   },
   /**
    *  Set a Todo
@@ -118,7 +124,7 @@ const mutations = {
    *  @param {Object} todo
    */
   setTodo(state, todo) {
-    state.todo = todo;
+    state.todo = todo
   },
   /**
    *  Unset a Todo
@@ -126,7 +132,7 @@ const mutations = {
    *  @param {Object} state
    */
   unsetTodo(state) {
-    state.todo = {};
+    state.todo = {}
   },
   /**
    *  Push a todo
@@ -135,7 +141,7 @@ const mutations = {
    *  @param {Object} todo
    */
   pushTodo(state, todo) {
-    state.todos.push(todo);
+    state.todos.push(todo)
   },
   /**
    *  Remove Todo
@@ -144,15 +150,15 @@ const mutations = {
    *  @param {Number} id
    */
   removeTodo(state, id) {
-    const todos = state.todos;
+    const todos = state.todos
     const newTodos = todos.map(t => {
       if (t.id === id)
-        t.status = 'deleted';
+        t.status = 'deleted'
 
-      return t;
+      return t
     })
 
-    state.todos = newTodos;
+    state.todos = newTodos
   },
   /**
    *  Complete Todo
@@ -161,15 +167,15 @@ const mutations = {
    *  @param {Number} id
    */
   completeTodo(state, id) {
-    const currentTodos = state.todos;
+    const currentTodos = state.todos
     const newTodos = currentTodos.map(t => {
       if (t.id === id)
-        t.status = 'done';
+        t.status = 'done'
 
-      return t;
+      return t
     });
 
-    state.todos = newTodos;
+    state.todos = newTodos
   },
   /**
    *  Update a todo from the todo list
@@ -178,17 +184,32 @@ const mutations = {
    *  @param {Object} todo
    */
   updateTodo(state, todo) {
-    const currentTodos = state.todos;
+    const currentTodos = state.todos
     const newTodos = currentTodos.map(t => {
       if (t.id === todo.id) {
-        t.description = todo.description;
-        t.status = todo.status;
+        t.description = todo.description
+        t.status = todo.status
       }
 
-      return t;
+      return t
     });
 
-    state.todos = newTodos;
+    state.todos = newTodos
+  },
+  /**
+   *  Look for a todo and remove it from todo list
+   *
+   *  @param {Object} state
+   *  @param {Number} id
+   */
+  deleteTodoById(state, id) {
+    const toSpliceTodos = state.todos
+
+    const indexToSplice = toSpliceTodos.findIndex(t => t.id === id)
+
+    toSpliceTodos.splice(indexToSplice, 1);
+
+    state.todos = toSpliceTodos
   }
 };
 

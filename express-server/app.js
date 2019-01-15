@@ -51,6 +51,19 @@ low(adapter)
       res.send(put.value())
     })
 
+    app.delete('/todos/:id', (req, res) => {
+      const id = parseInt(req.params.id, 10)
+      const todos = db.get('todos').value()
+
+      const indexToSplice = todos.findIndex(t => t.id === id)
+      const itemToRemove = todos.splice(indexToSplice, 1)
+
+      db.set('todos', todos)
+        .write()
+
+      res.send(itemToRemove[0])
+    })
+
     return db.defaults({
       todos: []
     })
