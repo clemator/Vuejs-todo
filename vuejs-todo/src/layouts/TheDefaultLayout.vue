@@ -34,6 +34,8 @@ export default {
 
 <style lang="scss">
 .default-layout {
+  height: 100%;
+  background-color: #F0F0F0;
   .list-container {
     margin-top: 50px;
     .columns-container {

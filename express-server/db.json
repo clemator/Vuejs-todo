@@ -7,12 +7,12 @@
     },
     {
       "description": "Issue #2",
-      "status": "done",
+      "status": "doing",
       "id": 2
     },
     {
       "description": "Issue #3",
-      "status": "doing",
+      "status": "done",
       "id": 3
     },
     {
@@ -37,12 +37,12 @@
     },
     {
       "description": "Issue #8",
-      "status": "done",
+      "status": "doing",
       "id": 8
     },
     {
       "description": "Issue #9",
-      "status": "doing",
+      "status": "done",
       "id": 9
     },
     {

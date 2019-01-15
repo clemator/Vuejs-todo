@@ -16,7 +16,7 @@
         <div
           class="label"
         >
-          Description:
+          Description*
         </div>
         <textarea
           class="description-input"
@@ -31,7 +31,7 @@
         <div
           class="label"
         >
-          Status:
+          Status*
         </div>
         <select
           class="status-input"
@@ -45,30 +45,32 @@
       </div>
     </div>
     <div
+      class="button-group"
       v-if="mode === 'creation'"
     >
       <button
-        class="todo-form__submit-button"
+        class="submit-button primary"
         @click="submitForm()"
       >
         Create
       </button>
     </div>
     <div
+      class="button-group"
       v-else
     >
-      <button
-        class="todo-form__submit-button"
-        @click="submitForm()"
-      >
-        Save
-      </button>
-
-      <button
-        class="todo-form__submit-button"
+    <button
+        class="submit-button danger-button"
         @click="deleteCallback()"
       >
         Delete
+      </button>
+
+      <button
+        class="submit-button primary"
+        @click="submitForm()"
+      >
+        Save
       </button>
     </div>
   </div>
@@ -182,12 +184,31 @@ export default {
     }
   }
 
-  &__submit-button {
-    margin: 0 20px;
-    height: 35px;
-    border-radius: 4px;
-    outline: none;
-    cursor: pointer;
+  .button-group {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .submit-button {
+      margin: 0;
+      height: 35px;
+      min-width: 100px;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+      font-size: 17px;
+
+      &.primary {
+        background-color: rgb(76, 175, 80);
+      }
+
+      &.danger-button {
+        background-color: rgb(220, 80, 10);
+      }
+    }
   }
 }
 </style>
