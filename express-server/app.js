@@ -21,6 +21,7 @@ low(adapter)
   .then(db => {
     app.get('/todos', (req, res) => {
       const post = db.get('todos')
+        .filter(t => t.status !== 'deleted')
         .value()
 
       res.send(post)
@@ -53,15 +54,13 @@ low(adapter)
 
     app.delete('/todos/:id', (req, res) => {
       const id = parseInt(req.params.id, 10)
-      const todos = db.get('todos').value()
+      const put = db.get('todos')
+        .find({ id: id })
 
-      const indexToSplice = todos.findIndex(t => t.id === id)
-      const itemToRemove = todos.splice(indexToSplice, 1)
-
-      db.set('todos', todos)
+      put.assign({ status: 'deleted' })
         .write()
 
-      res.send(itemToRemove[0])
+      res.send(put.value())
     })
 
     return db.defaults({
