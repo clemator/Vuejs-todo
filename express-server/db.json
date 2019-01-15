@@ -32,7 +32,7 @@
     },
     {
       "description": "Papa",
-      "status": "doing",
+      "status": "backlog",
       "id": 8
     },
     {
@@ -42,12 +42,12 @@
     },
     {
       "description": "MAMAMIA",
-      "status": "done",
+      "status": "doing",
       "id": 12
     },
     {
       "description": "Eric James",
-      "status": "backlog",
+      "status": "done",
       "id": 13
     }
   ]

@@ -6,7 +6,9 @@
 
 - Vuejs
 - Vuex
+- babel-plugin-transform-vue-jsx
 - vue-js-modal
+- vue-draggable
 
 ## Back application
 

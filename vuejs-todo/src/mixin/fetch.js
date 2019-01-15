@@ -58,6 +58,12 @@ export const fetchMixin = {
         .then(() => this.$store.dispatch('todos/unsetTodo'))
         .catch(err => Promise.reject(err));
     },
+    /**
+     *  Delete
+     *    - Delete data on server
+     *
+     *  @return {Promise}
+     */
     delete() {
       const todoId = this.$store.getters['todos/todo'].id
       const params = {

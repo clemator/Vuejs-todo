@@ -11,11 +11,11 @@ export default {
     })
   },
   /**
-   *  Created
+   *  Created component hook
+   *    - Fetch initial data from todo list
    */
   created() {
     this.get()
-      /* eslint-disable-next-line */
       .catch(err => console.error(err));
   },
   /**
@@ -23,7 +23,6 @@ export default {
    *
    *  @return {Component}
    */
-  /* eslint-disable-next-line */
   render(h) {
     return (
       <div class="list-container">

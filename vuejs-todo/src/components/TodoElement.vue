@@ -13,7 +13,7 @@
 
 <script>
   export default {
-  name: "TodoElement",
+  name: 'TodoElement',
   props: {
     todo: {
       type: Object,

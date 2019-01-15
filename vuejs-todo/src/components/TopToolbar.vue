@@ -21,7 +21,6 @@ export default {
         callback: ({ description, status }) => {
           return this.$store.dispatch('todos/setTodo', { description, status })
             .then(() => this.post())
-            /* eslint-disable-next-line */
             .catch(err => console.error(err))
             .then(this.closeModal())
         }
