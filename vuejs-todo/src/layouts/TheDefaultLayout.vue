@@ -10,7 +10,7 @@
           v-for="(status, index) in ['backlog', 'doing', 'done']"
           :key="index"
           :status="status"
-          :todos="todos"
+          :todos="todos.filter(t => t.status === status)"
         />
       </div>
     </ListContainer>
@@ -28,6 +28,11 @@ export default {
     TopToolbar,
     ListContainer,
     ListByStatus,
+  },
+  computed: {
+    filteredTodos() {
+
+    }
   }
 }
 </script>

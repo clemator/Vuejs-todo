@@ -1,9 +1,9 @@
 {
   "todos": [
     {
-      "id": 1,
       "description": "Issue #1",
-      "status": "backlog"
+      "status": "backlog",
+      "id": 1
     },
     {
       "description": "Issue #2",

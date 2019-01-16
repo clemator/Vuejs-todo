@@ -3,7 +3,6 @@
     class="todo-element"
     :id="todo.id"
     @click="$emit('todo-click')"
-    @drag="$emit('todo-drag')"
   >
     <div class="id">Id: {{todo.id}}</div>
     <div class="description">Description: {{todo.description}}</div>

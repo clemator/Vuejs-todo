@@ -1,54 +1,36 @@
 <template>
-  <div
+  <draggable
     :class="['list-by-status', status]"
-    v-drag-and-drop:options="options"
+    :list="filteredTodos"
+    :options="{group: 'todos', draggable:'.todo-element'}"
+    @remove="handleRemoveTodo"
   >
     <div
       class="list-title"
     >
       {{ status }}
     </div>
-    <div
+    <TodoElement
+      class="todo-element"
       v-for="todo in filteredTodos"
       :key="todo.id"
-    >
-      <TodoElement
-        @todo-click="selectTodo(todo)"
-        :todo="todo"
-        @todo-drag="setTodo(todo)"
-      />
-    </div>
-  </div>
+      @todo-click="selectTodo(todo)"
+      :todo="todo"
+    />
+  </draggable>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import TodoElement from './TodoElement.vue'
 import TodoForm from './TodoForm.vue'
 import { fetchMixin } from '../mixin/fetch'
 
 export default {
-  name: "ListByStatus",
+  name: 'ListByStatus',
   mixins: [fetchMixin],
-  data() {
-    const vm = this;
-
-    return {
-      options: {
-        dropzoneSelector: 'div.list-by-status',
-        draggableSelector: 'div.todo-element',
-        showDropzoneAreas: true,
-        onDragend(event) {
-          const {description, id} = vm.$store.getters['todos/todo']
-          const targetStatus = event.droptarget.className.split(' ')[1];
-          return vm.$store.dispatch('todos/updateTodo', {id, description, status: targetStatus})
-            .then(() => vm.put())
-            .then(() => { event.stop() })
-            .catch(err => { return err })
-        },
-      }
-    }
-  },
   components: {
+    draggable,
     TodoElement
   },
   props: {
@@ -63,11 +45,23 @@ export default {
     }
   },
   computed: {
-    filteredTodos() {
-      return this.todos.filter(t => t.status === this.status)
+    filteredTodos: {
+      get() {
+        return this.todos
+      },
     },
   },
   methods: {
+    handleRemoveTodo(event) {
+      const targetStatus = event.to.classList[1]
+      const draggedTodoId = parseInt(event.item.id, 10)
+      const {description, id} = this.todos.find(t => t.id === draggedTodoId)
+      this.$store.dispatch('todos/setTodo', {description, id, status: targetStatus})
+        .then(() => this.put())
+    },
+    getDraggedTodoTargetStatus(ev) {
+      return 
+    },
     /**
      *  Set todo
      *
@@ -132,6 +126,11 @@ export default {
 </script>
 
 <style lang="scss">
+@keyframes nodeInserted {
+  from { opacity: 0.2; height: 0; }
+  to { opacity: 0.8; height: 76px; }
+}
+
 .list-by-status {
   flex: 1;
   max-width: 300px;
@@ -159,6 +158,19 @@ export default {
     font-weight: bold;
     color: white;
     text-transform: uppercase;
+  }
+
+  &[aria-dropeffect="move"]:focus,
+  &[aria-dropeffect="move"].dragover {
+    outline: none;
+    box-shadow: 0 0 0 1px #fff, 0 0 0 3px #68b;
+  }
+
+  .item-dropzone-area {
+    height: 76px;
+    opacity: 0.8;
+    animation-duration: 0.5s;
+    animation-name: nodeInserted;
   }
 }
 </style>
